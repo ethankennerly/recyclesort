@@ -1,5 +1,6 @@
 package com.finegamedesign.recyclesort
 {
+    import flash.display.DisplayObjectContainer;
     import flash.display.MovieClip;
     import flash.display.SimpleButton;
     import flash.events.Event;
@@ -16,25 +17,25 @@ package com.finegamedesign.recyclesort
     {
         [Embed(source="../../../../sfx/breathin.mp3")]
         private static var airPocketClass:Class;
-        private var airPocket:Sound = new airPocketClass();
+        internal var airPocket:Sound = new airPocketClass();
         [Embed(source="../../../../sfx/chime.mp3")]
         private static var completeClass:Class;
-        private var complete:Sound = new completeClass();
+        internal var complete:Sound = new completeClass();
         [Embed(source="../../../../sfx/chime.mp3")]
-        private static var correctClass:Class;
-        private var correct:Sound = new correctClass();
+        private static var selectClass:Class;
+        internal var select:Sound = new selectClass();
         [Embed(source="../../../../sfx/die.mp3")]
         private static var wrongClass:Class;
-        private var wrong:Sound = new wrongClass();
+        internal var wrong:Sound = new wrongClass();
         [Embed(source="../../../../sfx/getPearl2.mp3")]
-        private static var scoreUpClass:Class;
-        private var scoreUp:Sound = new scoreUpClass();
+        private static var correctClass:Class;
+        internal var correct:Sound = new correctClass();
         [Embed(source="../../../../sfx/wavesloop.mp3")]
         private static var loopClass:Class;
-        private var loop:Sound = new loopClass();
+        internal var loop:Sound = new loopClass();
         [Embed(source="../../../../sfx/oxygen dwon.mp3")]
         private static var strokeClass:Class;
-        private var stroke:Sound = new strokeClass();
+        internal var stroke:Sound = new strokeClass();
 
         private var loopChannel:SoundChannel;
 
@@ -44,6 +45,8 @@ package com.finegamedesign.recyclesort
         public var maxLevel_txt:TextField;
         public var score_txt:TextField;
         public var restartTrial_btn:SimpleButton;
+        public var input:MovieClip;
+        public var head:DisplayObjectContainer;
 
         private var inTrial:Boolean;
         private var level:int;
@@ -69,7 +72,6 @@ package com.finegamedesign.recyclesort
             LevelSelect.onSelect = load;
             LevelLoader.onLoaded = trial;
             model = new Model();
-            model.onScore = scoreUp.play;
             view = new View();
             updateHudText();
             // trial();
@@ -107,7 +109,7 @@ package com.finegamedesign.recyclesort
         {
             this.level = level;
             LevelLoader.load(level);
-            scoreUp.play();
+            select.play();
             gotoAndPlay("level");
             loopChannel = loop.play(0, int.MAX_VALUE);
         }

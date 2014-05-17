@@ -9,11 +9,11 @@ package com.finegamedesign.recyclesort
         internal static var levelScores:Array = [];
         internal static var score:int = 0;
 
-        internal var onScore:Function;
         internal var highScore:int;
+        internal var queue:Array;
+        internal var point:int = 0;
         internal var level:int;
         internal var levelScore:int;
-        internal var pearlsCollected:int;
         private var now:int;
         private var elapsed:Number;
         private var previousTime:int;
@@ -38,7 +38,7 @@ package com.finegamedesign.recyclesort
             previousTime = -1;
             now = -1;
             elapsed = 0;
-            pearlsCollected = 0;
+            queue = ["landfill", "recycle"];
         }
 
         internal function clear():void
@@ -73,6 +73,20 @@ package com.finegamedesign.recyclesort
             }
             score = sum;
             return sum;
+        }
+        
+        internal function answer(name:String):Boolean
+        {
+            var correct:Boolean = name == queue[0];
+            if (correct) {
+                point = 1;
+            }
+            else {
+                point = -1;
+            }
+            levelScores[level] += point;
+            queue.shift();
+            return correct;
         }
     }
 }
