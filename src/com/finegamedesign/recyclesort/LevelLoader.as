@@ -6,26 +6,9 @@ package com.finegamedesign.recyclesort
     public class LevelLoader extends Sprite
     {
         internal static var levels:Array = [
-            LevelPearl,
-            LevelPearls,
-            LevelPearls2,
-            LevelKelp,
-            LevelShark,
-            LevelPearlsChooseBest,
-            LevelPearls3,
-            LevelAir,
-            LevelPearlsChooseBest2,
-            LevelAirKelp,
-            LevelReef,
-            LevelAirShark,
-            LevelReefModerate,
-            LevelKelpShark,
-            LevelAirKelpShark,
-            LevelReefPassage,
-            LevelAir3KelpShark,
-            LevelAirKelpShark4,
-            LevelReefDifficult,
-            LevelAir3KelpShark4
+            LevelInput,
+            LevelTime,
+            LevelIdentify
         ];
 
         internal static var onLoaded:Function;

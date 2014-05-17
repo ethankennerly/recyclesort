@@ -27,8 +27,8 @@ package com.finegamedesign.recyclesort
         private static var wrongClass:Class;
         private var wrong:Sound = new wrongClass();
         [Embed(source="../../../../sfx/getPearl2.mp3")]
-        private static var contagionClass:Class;
-        private var contagion:Sound = new contagionClass();
+        private static var scoreUpClass:Class;
+        private var scoreUp:Sound = new scoreUpClass();
         [Embed(source="../../../../sfx/wavesloop.mp3")]
         private static var loopClass:Class;
         private var loop:Sound = new loopClass();
@@ -38,13 +38,10 @@ package com.finegamedesign.recyclesort
 
         private var loopChannel:SoundChannel;
 
-        public var air:MovieClip;
-        public var background:MovieClip;
         public var feedback:MovieClip;
         public var highScore_txt:TextField;
         public var level_txt:TextField;
         public var maxLevel_txt:TextField;
-        public var room:MovieClip;
         public var score_txt:TextField;
         public var restartTrial_btn:SimpleButton;
 
@@ -72,10 +69,7 @@ package com.finegamedesign.recyclesort
             LevelSelect.onSelect = load;
             LevelLoader.onLoaded = trial;
             model = new Model();
-            model.onContagion = contagion.play;
-            model.onAirPocket = onAirPocket;
-            model.onStroke = stroke.play;
-            model.onDeselect = wrong.play;
+            model.onScore = scoreUp.play;
             view = new View();
             updateHudText();
             // trial();
@@ -113,7 +107,7 @@ package com.finegamedesign.recyclesort
         {
             this.level = level;
             LevelLoader.load(level);
-            contagion.play();
+            scoreUp.play();
             gotoAndPlay("level");
             loopChannel = loop.play(0, int.MAX_VALUE);
         }
@@ -122,8 +116,7 @@ package com.finegamedesign.recyclesort
         {
             inTrial = true;
             mouseChildren = true;
-            model.populate(level, DiverClip.instance.x, DiverClip.instance.y, DiverClip.instance.y,
-                PearlClip.instances, this.background.getRect(this));
+            model.populate(level);
             view.populate(model, this);
         }
 
@@ -193,10 +186,6 @@ package com.finegamedesign.recyclesort
 
         private function reset():void
         {
-            PearlClip.instances = [];
-            AirPocketClip.instances = [];
-            SharkClip.instances = [];
-            KelpClip.instances = [];
             if (null != loopChannel) {
                 loopChannel.stop();
             }

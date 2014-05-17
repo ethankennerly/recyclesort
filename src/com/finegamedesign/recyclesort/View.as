@@ -26,8 +26,6 @@ package com.finegamedesign.recyclesort
         {
             mouseJustPressed = !isMouseDown;
             if (mouseJustPressed) {
-                model.strokeToward(event.currentTarget.mouseX,
-                    event.currentTarget.mouseY);
             }
             isMouseDown = true;
         }
@@ -40,48 +38,11 @@ package com.finegamedesign.recyclesort
 
         internal function update():void
         {
-            if (DiverClip.instance) {
-                animate(model, DiverClip.instance);
-            }
-            if (model && main) {
-                gotoFraction(model.air, main.air);
-            }
-        }
-
-        private function gotoFraction(fraction:Number, mc:MovieClip):void
-        {
-            var frame:int = fraction * (mc.totalFrames - 1) + 1;
-            mc.gotoAndStop(frame);
         }
 
         internal function clear():void
         {
             model.clear();
-        }
-
-        /**
-         * position
-         * rotation
-         * frame
-         */
-        internal function animate(model:Model, diver:DiverClip):void
-        {
-            diver.x = model.diver.x;
-            diver.y = model.diver.y;
-            diver.rotation = model.rotation;
-            var body:MovieClip = diver.body;
-            if (model.animate(body.currentLabel)) {
-                body.gotoAndPlay(model.diverLabel);
-            }
-        }
-
-        internal static function exhaust():void
-        {
-            var clip:DiverClip = DiverClip.instance;
-            var exhaust:ExhaustClip = new ExhaustClip();
-            exhaust.x = clip.x;
-            exhaust.y = clip.y;
-            clip.parent.addChild(exhaust);
         }
     }
 }

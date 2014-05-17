@@ -1,6 +1,14 @@
 TODO
-	Icons:  Compost, Landfill, Recycle
+	clean template
+	Icons:  Landfill, Recycle
+	see shuffled items
+	items move
+	press a key, items move.
+	click button, items move.
 	color coded items sliding slowly down in a random lane.
+	time limit
+	-1 opportunity cost to reward accuracy and speed.
+	Icons:  Compost, Landfill, Recycle
 	mouse down:  item slides over and slides down quickly.  
 	non-color coded items
 	Opportunity cost or opportunity revenue from selection:  electronics, aluminum, food-soiled, paper, plastic, metal, glass, 
@@ -9,6 +17,7 @@ TODO
 	Recycle eyes and mouth inspired by recycle monster (terracycle)
 	Information after a session.
 	Introduce another item type
+	shuffle button positions
 	anti-color coded items
 	Landfill, Plastic Bags, Glass Plastic Aluminum, Electronics
 	San Francisco:  green glass worth recycling
@@ -110,4 +119,14 @@ Fixed number of trials, finish quickly.
 what goes where
 http://www.sfenvironment.org/article/residential-recycling-and-composting/how-to-recycle-and-compost-what-goes-where
 
+
+levels
+
+Press LEFT or RIGHT to sort garbage into landfill or recycle.
+
+Sort as many as you can in 30 seconds.
+
+Identify which items save the most.
+
+Compost food.
 
