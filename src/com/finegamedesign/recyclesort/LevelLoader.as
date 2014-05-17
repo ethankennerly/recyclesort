@@ -23,7 +23,6 @@ package com.finegamedesign.recyclesort
         }
 
         /**
-         * Add to list of pearls.
          * Disable selecting text.
          */
         public function LevelLoader() 

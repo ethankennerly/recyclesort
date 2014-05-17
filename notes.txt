@@ -1,5 +1,4 @@
 TODO
-	clean template
 	Icons:  Landfill, Recycle
 	see shuffled items
 	items move

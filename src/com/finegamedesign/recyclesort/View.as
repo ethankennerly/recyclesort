@@ -42,7 +42,9 @@ package com.finegamedesign.recyclesort
 
         internal function clear():void
         {
-            model.clear();
+            if (model) {
+                model.clear();
+            }
         }
     }
 }

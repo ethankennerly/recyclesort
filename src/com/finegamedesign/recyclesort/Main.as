@@ -10,7 +10,7 @@ package com.finegamedesign.recyclesort
     import flash.utils.getTimer;
 
     import org.flixel.plugin.photonstorm.API.FlxKongregate;
-    import com.newgrounds.API;
+    // import com.newgrounds.API;
 
     public dynamic class Main extends MovieClip
     {
@@ -76,7 +76,7 @@ package com.finegamedesign.recyclesort
             addEventListener(Event.ENTER_FRAME, update, false, 0, true);
             // level_txt.addEventListener(MouseEvent.CLICK, cheatLevel, false, 0, true);
             restartTrial_btn.addEventListener(MouseEvent.CLICK, restartTrial, false, 0, true);
-            API.connect(root, "36820:nuiq1ppF", "6GTZrYtEIqRS0IsHeFg5mmv8JFoJ7WRe");
+            // API.connect(root, "", "");
         }
 
         private function onAirPocket(pocket:MovieClip):void
@@ -181,7 +181,7 @@ package com.finegamedesign.recyclesort
                 correct.play();
             }
             FlxKongregate.api.stats.submit("Score", Model.score);
-            API.postScore("Score", Model.score);
+            // API.postScore("Score", Model.score);
         }
 
         private function reset():void
@@ -196,7 +196,7 @@ package com.finegamedesign.recyclesort
             reset();
             inTrial = false;
             FlxKongregate.api.stats.submit("Score", Model.score);
-            API.postScore("Score", Model.score);
+            // API.postScore("Score", Model.score);
             mouseChildren = false;
             feedback.gotoAndPlay("wrong");
             wrong.play();
