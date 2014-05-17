@@ -1,0 +1,113 @@
+TODO
+	Icons:  Compost, Landfill, Recycle
+	color coded items sliding slowly down in a random lane.
+	mouse down:  item slides over and slides down quickly.  
+	non-color coded items
+	Opportunity cost or opportunity revenue from selection:  electronics, aluminum, food-soiled, paper, plastic, metal, glass, 
+	landfill only:  mylar, styrofoam, ceramics, bakeware, neon paper
+	Fixed number of trials, finish quickly.
+	Recycle eyes and mouth inspired by recycle monster (terracycle)
+	Information after a session.
+	Introduce another item type
+	anti-color coded items
+	Landfill, Plastic Bags, Glass Plastic Aluminum, Electronics
+	San Francisco:  green glass worth recycling
+	Britain:  green glass not worth recycling
+	Raleigh, North Carolina:  green glass not worth recycling
+	Recycling center sorting
+	Buying items,
+	reduce
+	reuse
+
+
+REFERENCE GAMES
+	speed sort  fit brains.
+	Tomra Game on iPhone.  Objects are falling.  Recognize which bin they go to.  Wait until they are there, then swipe in that direction.  Speeds up when doing well.  Sometimes multiple bins.  Concerned, alert, satisfied.
+	recycle time on iphone shows arrows and color codes items.  swipe item in direction.
+	sort n recycle http://www.nationwideeducation.co.uk/sustainability-education/students/07-11_sustainable-houses/int_sort-n-recycle.php  drag items to bins.
+	sort your waste http://www.kidsgoflash.com/games/sort_your_waste.html see image and description.  click trash or recycle.
+	Recycle Me on Iphone:  tilt to sort into nine categories.
+	schoolyard recycling http://www.sciencekids.co.nz/gamesactivities/recycling.html items drop down automatically.  move the bins out of the way.  overwhelmed.  frustrated.
+	I recycle 2 iphone
+	recycle or die iphone:  move recycle bin, to catch plastic and avoid trash.
+	recycle roundup	http://www.ecookinggames.com/game/recycle-roundup/ items falling. grab from air or pick them up and place in one of three bins.
+	recycle factory http://sis.mob.org/game/recycle_factory.html
+	recycle this http://climatekids.nasa.gov/recycle-this/ falloing item air burst directs into one of five bins
+	sort the rubbish http://education.scholastic.co.uk/resources/36932
+	junkyard http://freegamemaniacs.com/junkyard/ get item to fall into a bin by deleting other objects.  they collapse.	
+	sammy seagull's school of recycling http://www.swansea.gov.uk/index.cfm?articleid=22069 put items in bins
+	recycling game http://www.fresno.gov/Government/DepartmentDirectory/PublicUtilities/SolidWaste/Recycling/RecyclingGame.htm place items in bins
+	The recycling game http://www.bbc.co.uk/schools/barnabybear/games/recycle.shtml recognize category, place item.
+	recycling game (paper game) http://www.lakeshorelearning.com/media/images/free_resources/teachers_corner/printables/recyclingGame.pdf  drag icons to bins.
+	recycle it! http://www.onesmileymonkey.com/giveaway/young-learners-recycle-it-game-feature-giveaway/ race to put items in bins.
+	keep it green http://www.willcountygreen.com/games/keepitgreen.aspx pick up items and place them.
+	michael, michael, go recycle http://littlegameplace.tumblr.com/post/232657268/review-1-michael-michael-go-recycle
+	recycle match http://www.willcountygreen.com/games/recyclematch.aspx
+	sort the rubbish http://www.ukhouseclearance.com/game2.htm manipulate robot arm to pickup and place paper, green glass, clear glass, and brown glass.
+	catapult the rubbish http://www.ukhouseclearance.com/game5.htm see item. aim at location.
+	recycle! http://www.primarygames.com/holidays/earth_day/games/recycle/	auto select bin, click item.  time limit.
+	recycle rush http://www.nick.com/games/big-time-rush-recycle-rush.html drop blue bag to person on level below.
+	dumptown http://www.epa.gov/recyclecity/dumptown.htm statistics of waste. start programs to reduce at a cost.
+	duckie deck http://duckiedeck.com/play/recycling refuse transforms into consumer items
+
+Green glass usually not worth it.
+
+Score points in terms of dollars saved.
+
+http://www.sunsetscavenger.com/index.php/for-businesses/commercial-recycling-compost-trash#composting
+
+"""
+Interestingly, in some of these (including my home town of Raleigh, North Carolina) there were legal or political barriers that forced the resumption of curbside glass collection.  Citizens voted to force the city to pick up the glass in those plastic bins, because they don’t like to throw the glass away.  The glass is picked up, trucked to the recycling facility, and either bagged or boxed and then shipped, in a different truck, to the landfill.  In effect, citizens are paying the city extra to throw away the glass, so that they can pretend it’s being recycled.[2] 
+"""
+http://www.cato-unbound.org/2013/06/03/michael-c-munger/recycling-can-it-be-wrong-when-it-feels-so-right
+
+Icons
+http://digital.vpr.net/post/vermont-has-new-universal-recycling-symbols
+
+
+Landfill, Plastic Bags, Glass Plastic Aluminum, Electronics
+http://1800recycling.com/2013/06/targets-recycling-kiosks-nationwide-recycling-solution
+
+Do not recycle:
+http://www.today.colostate.edu/story.aspx?id=4997
+
+terracycle monster
+http://www.mommytesters.com/2013/10/starting-terracycle-brigade-yes-you-can.html
+
+http://www.memecenter.com/fun/2443393/recycling
+
+http://rationalwiki.org/wiki/Penn_%26_Teller#Recycling
+
+
+"""
+The United States Environmental Protection Agency (EPA) has found that recycling causes 35% less water pollution and 74% less air pollution than making virgin paper.[18]...
+However, recycling mills may have polluting by-products like sludge. De-inking at Cross Pointe's Miami, Ohio mill results in sludge weighing 22% of the weight of wastepaper recycled.[20]
+"""
+http://en.wikipedia.org/wiki/Paper_recycling
+
+
+http://abcnews.go.com/US/story?id=91824&page=2
+
+
+"""
+ For some types of recycling, this may be true -- the trade-off between new products and some forms of recycled plastic, for example, are questionable. 
+"""
+http://science.howstuffworks.com/environmental/green-science/recycling6.htm
+
+
+Composting might prevent some pollution.
+http://www.a2gov.org/government/publicservices/fieldoperations/solidwasteunit/Documents/BASF_Total%20Economic%20Value%20of%20Compost-%20Zero%20Waste%20Summit%202011.pdf
+
+Receipt paper has BPA.
+http://greenactioncentre.ca/living-green-living-well/myth-you-cant-compost-paper/
+
+First: reduce, reuse.
+
+Reuse bucket.  Cabinet.
+
+Fixed number of trials, finish quickly.
+
+what goes where
+http://www.sfenvironment.org/article/residential-recycling-and-composting/how-to-recycle-and-compost-what-goes-where
+
+
