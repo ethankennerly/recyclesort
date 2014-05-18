@@ -27,9 +27,10 @@ package com.finegamedesign.recyclesort
         ]
 
         internal static var levels:Array = [
-            {deck: 0, deckCount: 1},
-            {deck: 0, deckCount: 20},
-            {deck: 1, deckCount: 20}
+            {deck: 0, deckCount: 2, filters: 1},
+            {deck: 0, deckCount: 20, filters: 1},
+            {deck: 1, deckCount: 20, filters: 1},
+            {deck: 1, deckCount: 20, filters: 4}
         ];
 
         public static function shuffle(array:Array):void
@@ -42,6 +43,7 @@ package com.finegamedesign.recyclesort
             }
         }
 
+        internal var filters:int;
         internal var queueMax:int;
         internal var highScore:int;
         internal var queue:Array;
@@ -66,11 +68,13 @@ package com.finegamedesign.recyclesort
             }
             levelScore = 0;
             correctCount = 0;
+            var params:Object = levels[level - 1];
+            filters = params.filters;
             secondsRemaining = int.MAX_VALUE;
             queueMax = int.MAX_VALUE;
             queue = [];
-            for (var i:int = 0; i < levels[level - 1].deckCount; i++) {
-                var deck:Array = decks[levels[level - 1].deck].concat();
+            for (var i:int = 0; i < params.deckCount; i++) {
+                var deck:Array = decks[params.deck].concat();
                 shuffle(deck);
                 queue = queue.concat(deck);
             }
@@ -136,7 +140,7 @@ package com.finegamedesign.recyclesort
         
         internal function answer(name:String):Boolean
         {
-            point = values[queue[0]][name];
+            point = values[queue[0]][name] * filters;
             levelScore += point;
             queue.shift();
             var correct:Boolean = 0 <= point;

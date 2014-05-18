@@ -8,7 +8,8 @@ package com.finegamedesign.recyclesort
         internal static var levels:Array = [
             LevelInput,
             LevelTime,
-            LevelIdentify
+            LevelIdentify,
+            LevelIgnoreColor
         ];
 
         internal static var onLoaded:Function;

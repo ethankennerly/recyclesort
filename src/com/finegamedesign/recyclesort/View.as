@@ -9,6 +9,14 @@ package com.finegamedesign.recyclesort
 
     public class View
     {
+        private static var filters:Array = [
+            new Filter0().getChildAt(0).filters,
+            new Filter1().getChildAt(0).filters,
+            new Filter2().getChildAt(0).filters,
+            new Filter3().getChildAt(0).filters,
+            new Filter4().getChildAt(0).filters
+        ];
+
         private static var itemClasses:Object = {
             landfill:   ItemLandfill,
             recycle:   ItemRecycle,
@@ -48,6 +56,8 @@ package com.finegamedesign.recyclesort
                 var item:DisplayObjectContainer = new itemClass();
                 item.x = main.input.head.x;
                 item.y = queueY(i);
+                var f:int = Math.random() * model.filters;
+                item.filters = filters[f];
                 item.mouseChildren = false;
                 item.mouseEnabled = false;
                 item.cacheAsBitmap = true;

@@ -17,12 +17,6 @@ package com.finegamedesign.recyclesort
 
     public dynamic class Main extends MovieClip
     {
-        [Embed(source="../../../../sfx/breathin.mp3")]
-        private static var airPocketClass:Class;
-        internal var airPocket:Sound = new airPocketClass();
-        [Embed(source="../../../../sfx/chime.mp3")]
-        private static var completeClass:Class;
-        internal var complete:Sound = new completeClass();
         [Embed(source="../../../../sfx/chime.mp3")]
         private static var selectClass:Class;
         internal var select:Sound = new selectClass();
@@ -35,9 +29,6 @@ package com.finegamedesign.recyclesort
         [Embed(source="../../../../sfx/wavesloop.mp3")]
         private static var loopClass:Class;
         internal var loop:Sound = new loopClass();
-        [Embed(source="../../../../sfx/oxygen dwon.mp3")]
-        private static var strokeClass:Class;
-        internal var stroke:Sound = new strokeClass();
 
         private var loopChannel:SoundChannel;
 
@@ -79,34 +70,15 @@ package com.finegamedesign.recyclesort
             model = new Model();
             view = new View();
             updateHudText();
-            // trial();
             addEventListener(Event.ENTER_FRAME, update, false, 0, true);
-            // level_txt.addEventListener(MouseEvent.CLICK, cheatLevel, false, 0, true);
             restartTrial_btn.addEventListener(MouseEvent.CLICK, restartTrial, false, 0, true);
             // API.connect(root, "", "");
-        }
-
-        private function onAirPocket(pocket:MovieClip):void
-        {
-            if (1 == pocket.currentFrame) {
-                pocket.play();
-                airPocket.play();
-            }
-        }
-
-        private function cheatLevel(event:MouseEvent):void
-        {
-            level++;
-            if (maxLevel < level) {
-                level = 1;
-            }
         }
 
         private function restartTrial(e:MouseEvent):void
         {
             reset();
             next();
-            // lose();
         }
 
         public function load(level:int):void
@@ -198,13 +170,11 @@ package com.finegamedesign.recyclesort
             level++;
             if (maxLevel < level) {
                 // level = 0;
-                feedback.gotoAndPlay("complete");
-                complete.play();
             }
             else {
-                feedback.gotoAndPlay("correct");
-                correct.play();
             }
+            feedback.gotoAndPlay("correct");
+            correct.play();
             FlxKongregate.api.stats.submit("Score", Model.score);
             // API.postScore("Score", Model.score);
         }
@@ -239,8 +209,6 @@ package com.finegamedesign.recyclesort
 
         public function restart():void
         {
-            // level = 1;
-            // trial();
             mouseChildren = true;
             gotoAndPlay(1);
         }
