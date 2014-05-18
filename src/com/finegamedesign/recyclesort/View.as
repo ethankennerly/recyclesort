@@ -61,7 +61,20 @@ package com.finegamedesign.recyclesort
         private function answer(name:String):void
         {
             main.answer(model.answer(name));
+            point(main.input[name]);
             shift(main.input[name]);
+        }
+
+        private function point(target:DisplayObject):void
+        {
+            var point:PointClip = new PointClip();
+            point.x = target.x;
+            point.y = target.y;
+            point.mouseChildren = false;
+            point.mouseEnabled = false;
+            point.txt.text = model.point.toString();
+            garbage.push(point);
+            main.input.addChild(point);
         }
 
         internal function update():void
@@ -72,7 +85,7 @@ package com.finegamedesign.recyclesort
             else if (main.keyMouse.justPressed("RIGHT")) {
                 answer("recycle");
             }
-            if (main.keyMouse.justPressed("MOUSE")) {
+            else if (main.keyMouse.justPressed("MOUSE")) {
                 var name:String = main.keyMouse.target.name;
                 if (name in itemClasses) {
                     answer(name);
@@ -83,10 +96,11 @@ package com.finegamedesign.recyclesort
         internal function clear():void
         {
             for each(var item:DisplayObject in garbage) {
-                if (garbage.parent) {
-                    garbage.parent.remove(garbage);
+                if (item.parent) {
+                    item.parent.removeChild(item);
                 }
             }
+            garbage = [];
             if (model) {
                 model.clear();
             }

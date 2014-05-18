@@ -110,6 +110,7 @@ package com.finegamedesign.recyclesort
 
         public function load(level:int):void
         {
+            view.clear();
             this.level = level;
             LevelLoader.load(level);
             select.play();
