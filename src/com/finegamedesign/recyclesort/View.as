@@ -9,11 +9,14 @@ package com.finegamedesign.recyclesort
 
     public class View
     {
+        private static var itemClasses:Object = {
+            landfill:   ItemLandfill,
+            recycle:   ItemRecycle
+        }
+
         internal var main:Main;
         internal var onCorrect:Function;
         internal var model:Model;
-        private var isMouseDown:Boolean;
-        private var mouseJustPressed:Boolean;
         private var queue:Array;
 
         public function View()
@@ -24,17 +27,8 @@ package com.finegamedesign.recyclesort
         {
             this.model = model;
             this.main = main;
-            main.stage.addEventListener(MouseEvent.MOUSE_UP, mouseUp, false, 0, true);
-            // main.stage.addEventListener(MouseEvent.MOUSE_DOWN, mouseDown, false, 0, true);
-            main.input.landfill.addEventListener(MouseEvent.MOUSE_DOWN, mouseDown, false, 0, true);
-            main.input.recycle.addEventListener(MouseEvent.MOUSE_DOWN, mouseDown, false, 0, true);
             populateQueue(model.queue);
         }
-
-        private static var itemClasses:Object = {
-            landfill:   ItemLandfill,
-            recycle:   ItemRecycle
-        };
 
         private function populateQueue(queueModel:Array):void
         {
@@ -61,30 +55,31 @@ package com.finegamedesign.recyclesort
             queue.shift();
         }
 
-        private function mouseDown(event:MouseEvent):void
+        private function answer(name:String):void
         {
-            mouseJustPressed = !isMouseDown;
-            if (mouseJustPressed) {
-                var name:String = event.currentTarget.name;
-                if (model.answer(name)) {
-                    main.correct.play();
-                }
-                else {
-                    main.wrong.play();
-                }
-                shift(DisplayObject(event.currentTarget));
+            if (model.answer(name)) {
+                main.correct.play();
             }
-            isMouseDown = true;
-        }
-
-        private function mouseUp(event:MouseEvent):void
-        {
-            mouseJustPressed = false;
-            isMouseDown = false;
+            else {
+                main.wrong.play();
+            }
+            shift(main.input[name]);
         }
 
         internal function update():void
         {
+            if (main.keyMouse.justPressed("LEFT")) {
+                answer("landfill");
+            }
+            else if (main.keyMouse.justPressed("RIGHT")) {
+                answer("recycle");
+            }
+            if (main.keyMouse.justPressed("MOUSE")) {
+                var name:String = main.keyMouse.target.name;
+                if (name in itemClasses) {
+                    answer(name);
+                }
+            }
         }
 
         internal function clear():void

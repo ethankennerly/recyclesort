@@ -10,6 +10,7 @@ package com.finegamedesign.recyclesort
     import flash.text.TextField;
     import flash.utils.getTimer;
 
+    import org.flixel.system.input.KeyMouse;
     import org.flixel.plugin.photonstorm.API.FlxKongregate;
     // import com.newgrounds.API;
 
@@ -48,6 +49,7 @@ package com.finegamedesign.recyclesort
         public var input:MovieClip;
         public var head:DisplayObjectContainer;
 
+        internal var keyMouse:KeyMouse;
         private var inTrial:Boolean;
         private var level:int;
         private var maxLevel:int;
@@ -66,6 +68,8 @@ package com.finegamedesign.recyclesort
 
         public function init(event:Event=null):void
         {
+            keyMouse = new KeyMouse();
+            keyMouse.listen(stage);
             reset();
             inTrial = false;
             level = 1;
@@ -134,6 +138,7 @@ package com.finegamedesign.recyclesort
         private function update(event:Event):void
         {
             var now:int = getTimer();
+            keyMouse.update();
             // After stage is setup, connect to Kongregate.
             // http://flixel.org/forums/index.php?topic=293.0
             // http://www.photonstorm.com/tags/kongregate
