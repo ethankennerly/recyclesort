@@ -28,8 +28,8 @@ package com.finegamedesign.recyclesort
 
         internal static var levels:Array = [
             {deck: 0, deckCount: 1},
-            {deck: 0, deckCount: 100},
-            {deck: 1, deckCount: 100}
+            {deck: 0, deckCount: 20},
+            {deck: 1, deckCount: 20}
         ];
 
         public static function shuffle(array:Array):void
@@ -42,14 +42,14 @@ package com.finegamedesign.recyclesort
             }
         }
 
+        internal var queueMax:int;
         internal var highScore:int;
         internal var queue:Array;
         internal var point:int = 0;
         internal var level:int;
         internal var levelScore:int;
-        private var timeRemaining:int;
-        private var elapsed:Number;
-        private var previousTime:int;
+        private var correctCount:int;
+        private var secondsRemaining:int;
 
         public function Model()
         {
@@ -65,9 +65,9 @@ package com.finegamedesign.recyclesort
                 levelScores[level] = 0;
             }
             levelScore = 0;
-            previousTime = -1;
-            timeRemaining = int.MAX_VALUE;
-            elapsed = 0;
+            correctCount = 0;
+            secondsRemaining = int.MAX_VALUE;
+            queueMax = int.MAX_VALUE;
             queue = [];
             for (var i:int = 0; i < levels[level - 1].deckCount; i++) {
                 var deck:Array = decks[levels[level - 1].deck].concat();
@@ -85,10 +85,27 @@ package com.finegamedesign.recyclesort
             return 2 <= level;
         }
 
-        internal function update(timeRemaining:int):int
+        internal function update(secondsRemaining:int):int
         {
-            this.timeRemaining = timeRemaining;
+            this.secondsRemaining = secondsRemaining;
+            splice();
             return win();
+        }
+
+        internal function splice():void
+        {
+            var speed:Number = correctCount 
+                / Math.max(1.0, seconds - secondsRemaining);
+            if (secondsRemaining <= 6) {
+                queueMax = Math.max(10, speed * secondsRemaining);
+            }
+            else {
+                queueMax = int.MAX_VALUE;
+            }
+            if (queueMax < queue.length) {
+                trace("Model.update: splicing " + queue.length + " to " + queueMax);
+                queue.splice(queueMax, int.MAX_VALUE);
+            }
         }
 
         /**
@@ -98,7 +115,7 @@ package com.finegamedesign.recyclesort
         {
             updateScore();
             var winning:int = 0;
-            if (queue.length == 0 || timeRemaining <= 0) {
+            if (queue.length == 0 || secondsRemaining <= 0) {
                 winning = 1 <= levelScore ? 1 : -1;
             }
             return winning;
@@ -123,6 +140,9 @@ package com.finegamedesign.recyclesort
             levelScore += point;
             queue.shift();
             var correct:Boolean = 0 <= point;
+            if (correct) {
+                correctCount++;
+            }
             return correct;
         }
     }

@@ -5,6 +5,7 @@ package com.finegamedesign.recyclesort
     import flash.display.SimpleButton;
     import flash.events.Event;
     import flash.events.MouseEvent;
+    import flash.geom.Rectangle;
     import flash.media.Sound;
     import flash.media.SoundChannel;
     import flash.text.TextField;
@@ -64,9 +65,10 @@ package com.finegamedesign.recyclesort
                 addEventListener(Event.ADDED_TO_STAGE, init, false, 0, true);
             }
         }
-
+        
         public function init(event:Event=null):void
         {
+            scrollRect = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
             keyMouse = new KeyMouse();
             keyMouse.listen(stage);
             inTrial = false;

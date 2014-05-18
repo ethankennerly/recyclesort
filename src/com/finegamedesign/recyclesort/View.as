@@ -43,27 +43,33 @@ package com.finegamedesign.recyclesort
         {
             queue = [];
             garbage = [];
-            for (var i:int = 0; i < queueModel.length; i++) {
+            for (var i:int = queueModel.length - 1; 0 <= i; i--) {
                 var itemClass:Class = itemClasses[queueModel[i]];
                 var item:DisplayObjectContainer = new itemClass();
                 item.x = main.input.head.x;
-                item.y = main.input.head.y - (i * main.input.head.height);
+                item.y = queueY(i);
                 item.mouseChildren = false;
                 item.mouseEnabled = false;
-                queue.push(item);
-                garbage.push(item);
-                var index:int = main.input.getChildIndex(main.input.head) - 1;
+                item.cacheAsBitmap = true;
+                queue.unshift(item);
+                garbage.unshift(item);
+                var index:int = main.input.getChildIndex(main.input.head);
                 main.input.addChildAt(item, index);
             }
         }
 
+        private function queueY(i:int):int
+        {
+            return main.input.head.y - int(i * main.input.head.height);
+        }
+
         private function shift(target:DisplayObject):void
         {
-            for each(var item:DisplayObject in queue) {
-                TweenLite.to(item, 0.2, {x: target.x, y: target.y});
-                target = item;
+            var time:Number = 0.2;
+            TweenLite.to(queue.shift(), time, {x: target.x, y: target.y});
+            for (var i:int = 0; i < queue.length; i++) {
+                TweenLite.to(queue[i], time, {y: queueY(i)});
             }
-            queue.shift();
         }
 
         private function answer(name:String):void
@@ -103,18 +109,29 @@ package com.finegamedesign.recyclesort
                 }
             }
             var winning:int = model.update(countdown.remaining);
+            splice(model.queueMax);
             return winning;
         }
 
-        internal function clear():void
+        private function splice(max:int):void
         {
-            countdown.stop();
+            remove(queue.splice(max, int.MAX_VALUE));
+        }
+
+        private function remove(garbage:Array):void
+        {
             for each(var item:DisplayObject in garbage) {
                 if (item.parent) {
                     item.parent.removeChild(item);
                 }
             }
-            garbage = [];
+            garbage.length = 0;
+        }
+
+        internal function clear():void
+        {
+            countdown.stop();
+            remove(garbage);
             if (model) {
                 model.clear();
             }
