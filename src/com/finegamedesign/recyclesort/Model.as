@@ -9,6 +9,16 @@ package com.finegamedesign.recyclesort
         internal static var levelScores:Array = [];
         internal static var score:int = 0;
 
+        public static function shuffle(array:Array):void
+        {
+            for (var i:int = array.length - 1; 1 <= i; i--) {
+                var j:int = (i + 1) * Math.random();
+                var tmp:* = array[i];
+                array[i] = array[j];
+                array[j] = tmp;
+            }
+        }
+
         internal var highScore:int;
         internal var queue:Array;
         internal var point:int = 0;
@@ -25,9 +35,6 @@ package com.finegamedesign.recyclesort
             levelScores = [];
         }
 
-        /**
-         * 14/4/26 Load level.  Tyriq expects to fix swimmer does not move.
-         */
         internal function populate(level:int):void
         {
             this.level = level;
@@ -38,8 +45,13 @@ package com.finegamedesign.recyclesort
             previousTime = -1;
             now = -1;
             elapsed = 0;
-            queue = ["landfill", "recycle", "recycle", "landfill",
-                     "recycle", "landfill", "landfill", "recycle"];
+            queue = [];
+            for (var i:int = 0; i < level; i++) {
+                var deck:Array = ["landfill", "recycle", "recycle", "landfill",
+                         "recycle", "landfill"];
+                shuffle(deck);
+                queue = queue.concat(deck);
+            }
         }
 
         internal function clear():void
@@ -87,7 +99,7 @@ package com.finegamedesign.recyclesort
                 point = 1;
             }
             else {
-                point = -1;
+                point = -2;
             }
             levelScore += point;
             queue.shift();

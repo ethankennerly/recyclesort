@@ -10,6 +10,7 @@ TODO
 	Opportunity cost or opportunity revenue from selection:  electronics, aluminum, food-soiled, paper, plastic, metal, glass, 
 	landfill only:  mylar, styrofoam, ceramics, bakeware, neon paper
 	Fixed number of trials, finish quickly.
+	brighten level button.
 	Recycle eyes and mouth inspired by recycle monster (terracycle)
 	Information after a session.
 	Introduce another item type
