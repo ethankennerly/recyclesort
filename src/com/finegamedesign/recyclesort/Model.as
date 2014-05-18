@@ -38,7 +38,8 @@ package com.finegamedesign.recyclesort
             previousTime = -1;
             now = -1;
             elapsed = 0;
-            queue = ["landfill", "recycle"];
+            queue = ["landfill", "recycle", "recycle", "landfill",
+                     "recycle", "landfill", "landfill", "recycle"];
         }
 
         internal function clear():void
@@ -58,7 +59,11 @@ package com.finegamedesign.recyclesort
          */
         private function win():int
         {
+            updateScore();
             var winning:int = 0;
+            if (queue.length == 0) {
+                winning = 1 <= levelScore ? 1 : -1;
+            }
             return winning;
         }
 
@@ -84,7 +89,7 @@ package com.finegamedesign.recyclesort
             else {
                 point = -1;
             }
-            levelScores[level] += point;
+            levelScore += point;
             queue.shift();
             return correct;
         }

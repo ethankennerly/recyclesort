@@ -18,6 +18,7 @@ package com.finegamedesign.recyclesort
         internal var onCorrect:Function;
         internal var model:Model;
         private var queue:Array;
+        private var garbage:Array;
 
         public function View()
         {
@@ -33,6 +34,7 @@ package com.finegamedesign.recyclesort
         private function populateQueue(queueModel:Array):void
         {
             queue = [];
+            garbage = [];
             for (var i:int = 0; i < queueModel.length; i++) {
                 var itemClass:Class = itemClasses[queueModel[i]];
                 var item:DisplayObjectContainer = new itemClass();
@@ -41,6 +43,7 @@ package com.finegamedesign.recyclesort
                 item.mouseChildren = false;
                 item.mouseEnabled = false;
                 queue.push(item);
+                garbage.push(item);
                 main.input.addChildAt(item,
                     main.input.getChildIndex(main.input.head));
             }
@@ -57,12 +60,7 @@ package com.finegamedesign.recyclesort
 
         private function answer(name:String):void
         {
-            if (model.answer(name)) {
-                main.correct.play();
-            }
-            else {
-                main.wrong.play();
-            }
+            main.answer(model.answer(name));
             shift(main.input[name]);
         }
 
@@ -84,6 +82,11 @@ package com.finegamedesign.recyclesort
 
         internal function clear():void
         {
+            for each(var item:DisplayObject in garbage) {
+                if (garbage.parent) {
+                    garbage.parent.remove(garbage);
+                }
+            }
             if (model) {
                 model.clear();
             }

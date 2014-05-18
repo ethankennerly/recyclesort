@@ -1,9 +1,6 @@
 TODO
 	Icons:  Landfill, Recycle
 	see shuffled items
-	items move
-	press a key, items move.
-	click button, items move.
 	color coded items sliding slowly down in a random lane.
 	time limit
 	-1 opportunity cost to reward accuracy and speed.

@@ -40,11 +40,10 @@ package com.finegamedesign.recyclesort
 
         private var loopChannel:SoundChannel;
 
+        public var answerClip:MovieClip;
         public var feedback:MovieClip;
-        public var highScore_txt:TextField;
-        public var level_txt:TextField;
-        public var maxLevel_txt:TextField;
         public var score_txt:TextField;
+        public var levelScore_txt:TextField;
         public var restartTrial_btn:SimpleButton;
         public var input:MovieClip;
         public var head:DisplayObjectContainer;
@@ -126,10 +125,28 @@ package com.finegamedesign.recyclesort
             view.populate(model, this);
         }
 
+        internal function answer(correct:Boolean):void
+        {
+            answerClip.mouseChildren = false;
+            answerClip.mouseEnabled = false;
+            if (correct) {
+                this.correct.play();
+                answerClip.gotoAndPlay("correct");
+            }
+            else {
+                this.wrong.play();
+                answerClip.gotoAndPlay("wrong");
+            }
+        }
+
         private function updateHudText():void
         {
             // trace("updateHudText: ", score, highScore);
             score_txt.text = Model.score.toString();
+            if (model) {
+                levelScore_txt.text = model.levelScore.toString();
+            }
+            // score_txt.text = "12";
             // highScore_txt.text = Model.highScore.toString();
             // level_txt.text = level.toString();
             // maxLevel_txt.text = maxLevel.toString();
