@@ -8,6 +8,7 @@ package com.finegamedesign.recyclesort
     {
         internal static var levelScores:Array = [];
         internal static var score:int = 0;
+        internal static var seconds:int = 30;
 
         internal static var values:Object = {
             landfill: {landfill: 1, recycle: -1},
@@ -26,9 +27,9 @@ package com.finegamedesign.recyclesort
         ]
 
         internal static var levels:Array = [
-            {deck: 0},
-            {deck: 0},
-            {deck: 1}
+            {deck: 0, deckCount: 1},
+            {deck: 0, deckCount: 100},
+            {deck: 1, deckCount: 100}
         ];
 
         public static function shuffle(array:Array):void
@@ -46,7 +47,7 @@ package com.finegamedesign.recyclesort
         internal var point:int = 0;
         internal var level:int;
         internal var levelScore:int;
-        private var now:int;
+        private var timeRemaining:int;
         private var elapsed:Number;
         private var previousTime:int;
 
@@ -65,10 +66,10 @@ package com.finegamedesign.recyclesort
             }
             levelScore = 0;
             previousTime = -1;
-            now = -1;
+            timeRemaining = int.MAX_VALUE;
             elapsed = 0;
             queue = [];
-            for (var i:int = 0; i < level; i++) {
+            for (var i:int = 0; i < levels[level - 1].deckCount; i++) {
                 var deck:Array = decks[levels[level - 1].deck].concat();
                 shuffle(deck);
                 queue = queue.concat(deck);
@@ -79,11 +80,14 @@ package com.finegamedesign.recyclesort
         {
         }
 
-        internal function update(now:int):int
+        internal function timed():Boolean
         {
-            previousTime = 0 <= this.now ? this.now : now;
-            this.now = now;
-            elapsed = this.now - previousTime;
+            return 2 <= level;
+        }
+
+        internal function update(timeRemaining:int):int
+        {
+            this.timeRemaining = timeRemaining;
             return win();
         }
 
@@ -94,7 +98,7 @@ package com.finegamedesign.recyclesort
         {
             updateScore();
             var winning:int = 0;
-            if (queue.length == 0) {
+            if (queue.length == 0 || timeRemaining <= 0) {
                 winning = 1 <= levelScore ? 1 : -1;
             }
             return winning;

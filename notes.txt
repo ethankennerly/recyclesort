@@ -1,16 +1,13 @@
 TODO
-	color coded items sliding slowly down in a random lane.
 	30 second time limit
-	-1 opportunity cost to reward accuracy and speed.
-	Icons:  Compost, Landfill, Recycle
 	non-color coded items
 	color miscode items
 	plastic types
+	Icons:  Compost, Landfill, Recycle
 	clean or dirty
 	reuse or recycle or landfill
 	Opportunity cost or opportunity revenue from selection:  electronics, aluminum, food-soiled, paper, plastic, metal, glass, 
 	landfill only:  mylar, styrofoam, ceramics, bakeware, neon paper
-	Fixed number of trials, finish quickly.
 	brighten level button.
 	Recycle eyes and mouth inspired by recycle monster (terracycle)
 	Information after a session.
@@ -32,6 +29,7 @@ TODO
 	Recycling center sorting
 	Buying items,
 	reduce
+	Fixed number of trials, finish quickly.
 
 
 REFERENCE GAMES

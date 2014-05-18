@@ -41,8 +41,9 @@ package com.finegamedesign.recyclesort
         private var loopChannel:SoundChannel;
 
         public var feedback:MovieClip;
-        public var score_txt:TextField;
         public var levelScore_txt:TextField;
+        public var score_txt:TextField;
+        public var time_txt:TextField;
         public var restartTrial_btn:SimpleButton;
         public var input:MovieClip;
         public var head:DisplayObjectContainer;
@@ -68,11 +69,11 @@ package com.finegamedesign.recyclesort
         {
             keyMouse = new KeyMouse();
             keyMouse.listen(stage);
-            reset();
             inTrial = false;
             level = 1;
             LevelSelect.onSelect = load;
             LevelLoader.onLoaded = trial;
+            reset();
             model = new Model();
             view = new View();
             updateHudText();
@@ -102,14 +103,12 @@ package com.finegamedesign.recyclesort
         private function restartTrial(e:MouseEvent):void
         {
             reset();
-            view.clear();
             next();
             // lose();
         }
 
         public function load(level:int):void
         {
-            view.clear();
             this.level = level;
             LevelLoader.load(level);
             select.play();
@@ -166,9 +165,7 @@ package com.finegamedesign.recyclesort
                 FlxKongregate.init(FlxKongregate.connect);
             }
             if (inTrial) {
-                var win:int = model.update(now);
-                view.update();
-                result(win);
+                result(view.update());
             }
             else {
                 // view.update();
@@ -195,7 +192,6 @@ package com.finegamedesign.recyclesort
         private function win():void
         {
             reset();
-            inTrial = false;
             level++;
             if (maxLevel < level) {
                 // level = 0;
@@ -212,6 +208,10 @@ package com.finegamedesign.recyclesort
 
         private function reset():void
         {
+            inTrial = false;
+            if (view) {
+                view.clear();
+            }
             if (null != loopChannel) {
                 loopChannel.stop();
             }
@@ -220,7 +220,6 @@ package com.finegamedesign.recyclesort
         private function lose():void
         {
             reset();
-            inTrial = false;
             FlxKongregate.api.stats.submit("Score", Model.score);
             // API.postScore("Score", Model.score);
             mouseChildren = false;

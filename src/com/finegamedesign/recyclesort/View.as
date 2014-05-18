@@ -21,15 +21,22 @@ package com.finegamedesign.recyclesort
         internal var main:Main;
         internal var onCorrect:Function;
         internal var model:Model;
+        private var countdown:Countdown;
         private var garbage:Array;
         private var pointClip:PointClip;
         private var queue:Array;
+
+        public function View()
+        {
+            countdown = new Countdown();
+        }
 
         internal function populate(model:Model, main:Main):void
         {
             this.model = model;
             this.main = main;
             populateQueue(model.queue);
+            countdown.setup(Model.seconds, main.time_txt);
         }
 
         private function populateQueue(queueModel:Array):void
@@ -45,8 +52,8 @@ package com.finegamedesign.recyclesort
                 item.mouseEnabled = false;
                 queue.push(item);
                 garbage.push(item);
-                main.input.addChildAt(item,
-                    main.input.getChildIndex(main.input.head));
+                var index:int = main.input.getChildIndex(main.input.head) - 1;
+                main.input.addChildAt(item, index);
             }
         }
 
@@ -61,6 +68,7 @@ package com.finegamedesign.recyclesort
 
         private function answer(name:String):void
         {
+            countdown.start();
             var correct:Boolean = model.answer(name);
             pointClip = point(main.input[name]);
             main.answer(correct, pointClip);
@@ -80,7 +88,7 @@ package com.finegamedesign.recyclesort
             return point;
         }
 
-        internal function update():void
+        internal function update():int
         {
             if (main.keyMouse.justPressed("LEFT")) {
                 answer("landfill");
@@ -94,10 +102,13 @@ package com.finegamedesign.recyclesort
                     answer(name);
                 }
             }
+            var winning:int = model.update(countdown.remaining);
+            return winning;
         }
 
         internal function clear():void
         {
+            countdown.stop();
             for each(var item:DisplayObject in garbage) {
                 if (item.parent) {
                     item.parent.removeChild(item);
