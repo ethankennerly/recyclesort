@@ -130,6 +130,7 @@ package com.finegamedesign.recyclesort
         {
             input.answer.mouseChildren = false;
             input.answer.mouseEnabled = false;
+            input.addChild(input.answer);
             input.answer.x = pointClip.x;
             input.answer.y = pointClip.y;
             if (correct) {

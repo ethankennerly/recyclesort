@@ -66,7 +66,9 @@ package com.finegamedesign.recyclesort
         private function shift(target:DisplayObject):void
         {
             var time:Number = 0.2;
-            TweenLite.to(queue.shift(), time, {x: target.x, y: target.y});
+            var answering:DisplayObject = queue.shift();
+            main.input.addChild(answering);
+            TweenLite.to(answering, time, {x: target.x, y: target.y});
             for (var i:int = 0; i < queue.length; i++) {
                 TweenLite.to(queue[i], time, {y: queueY(i)});
             }
@@ -77,8 +79,8 @@ package com.finegamedesign.recyclesort
             countdown.start();
             var correct:Boolean = model.answer(name);
             pointClip = point(main.input[name]);
-            main.answer(correct, pointClip);
             shift(main.input[name]);
+            main.answer(correct, pointClip);
         }
 
         private function point(target:DisplayObject):PointClip
