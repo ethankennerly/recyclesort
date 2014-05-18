@@ -9,6 +9,28 @@ package com.finegamedesign.recyclesort
         internal static var levelScores:Array = [];
         internal static var score:int = 0;
 
+        internal static var values:Object = {
+            landfill: {landfill: 1, recycle: -1},
+            recycle: {landfill: -1, recycle: 1},
+            AluminumCan: {landfill: -8, recycle: 8},
+            PlasticBottle: {landfill: -1, recycle: 1},
+            Styrofoam: {landfill: 2, recycle: -2},
+            PlasticBag: {landfill: 7, recycle: -7}
+        }
+
+        internal static var decks:Array = [
+            ["landfill", "recycle", "recycle", "landfill", "recycle", "landfill"],
+            ["AluminumCan", "PlasticBottle", "Styrofoam", "PlasticBag",
+             "AluminumCan", "PlasticBottle", "Styrofoam", "PlasticBag",
+             "AluminumCan", "PlasticBottle", "Styrofoam", "PlasticBag"]
+        ]
+
+        internal static var levels:Array = [
+            {deck: 0},
+            {deck: 0},
+            {deck: 1}
+        ];
+
         public static function shuffle(array:Array):void
         {
             for (var i:int = array.length - 1; 1 <= i; i--) {
@@ -47,8 +69,7 @@ package com.finegamedesign.recyclesort
             elapsed = 0;
             queue = [];
             for (var i:int = 0; i < level; i++) {
-                var deck:Array = ["landfill", "recycle", "recycle", "landfill",
-                         "recycle", "landfill"];
+                var deck:Array = decks[levels[level - 1].deck].concat();
                 shuffle(deck);
                 queue = queue.concat(deck);
             }
@@ -94,15 +115,10 @@ package com.finegamedesign.recyclesort
         
         internal function answer(name:String):Boolean
         {
-            var correct:Boolean = name == queue[0];
-            if (correct) {
-                point = 1;
-            }
-            else {
-                point = -2;
-            }
+            point = values[queue[0]][name];
             levelScore += point;
             queue.shift();
+            var correct:Boolean = 0 <= point;
             return correct;
         }
     }

@@ -11,18 +11,19 @@ package com.finegamedesign.recyclesort
     {
         private static var itemClasses:Object = {
             landfill:   ItemLandfill,
-            recycle:   ItemRecycle
+            recycle:   ItemRecycle,
+            AluminumCan:   ItemAluminumCan,
+            PlasticBottle:   ItemPlasticBottle,
+            Styrofoam:   ItemStyrofoam,
+            PlasticBag:   ItemPlasticBag
         }
 
         internal var main:Main;
         internal var onCorrect:Function;
         internal var model:Model;
-        private var queue:Array;
         private var garbage:Array;
-
-        public function View()
-        {
-        }
+        private var pointClip:PointClip;
+        private var queue:Array;
 
         internal function populate(model:Model, main:Main):void
         {
@@ -60,12 +61,13 @@ package com.finegamedesign.recyclesort
 
         private function answer(name:String):void
         {
-            main.answer(model.answer(name));
-            point(main.input[name]);
+            var correct:Boolean = model.answer(name);
+            pointClip = point(main.input[name]);
+            main.answer(correct, pointClip);
             shift(main.input[name]);
         }
 
-        private function point(target:DisplayObject):void
+        private function point(target:DisplayObject):PointClip
         {
             var point:PointClip = new PointClip();
             point.x = target.x;
@@ -75,6 +77,7 @@ package com.finegamedesign.recyclesort
             point.txt.text = model.point.toString();
             garbage.push(point);
             main.input.addChild(point);
+            return point;
         }
 
         internal function update():void

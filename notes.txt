@@ -1,18 +1,27 @@
 TODO
-	Icons:  Landfill, Recycle
-	see shuffled items
 	color coded items sliding slowly down in a random lane.
-	time limit
+	30 second time limit
 	-1 opportunity cost to reward accuracy and speed.
 	Icons:  Compost, Landfill, Recycle
-	mouse down:  item slides over and slides down quickly.  
 	non-color coded items
+	color miscode items
+	plastic types
+	clean or dirty
+	reuse or recycle or landfill
 	Opportunity cost or opportunity revenue from selection:  electronics, aluminum, food-soiled, paper, plastic, metal, glass, 
 	landfill only:  mylar, styrofoam, ceramics, bakeware, neon paper
 	Fixed number of trials, finish quickly.
 	brighten level button.
 	Recycle eyes and mouth inspired by recycle monster (terracycle)
 	Information after a session.
+	reuse
+	high level:  random button position
+	high level:  switch button position during play
+	links to pros and cons of what to recycle, compost, landfill.
+	discriminate scores to 99th percentile.
+	discriminate scores to 99.9th percentile.
+	discriminate scores to 99.99th percentile.
+	auto scroll.
 	Introduce another item type
 	shuffle button positions
 	anti-color coded items
@@ -23,7 +32,6 @@ TODO
 	Recycling center sorting
 	Buying items,
 	reduce
-	reuse
 
 
 REFERENCE GAMES
@@ -116,6 +124,24 @@ Fixed number of trials, finish quickly.
 what goes where
 http://www.sfenvironment.org/article/residential-recycling-and-composting/how-to-recycle-and-compost-what-goes-where
 
+plastics types (not in san francisco, maybe in ann arbor):
+http://www.recycleannarbor.org/?module=Page&sID=resources-plastics-explained
+
+no bottle caps
+https://www.halifax.ca/wrms/Plastic.html
+
+styrofoam is expensive to recycle:
+http://greencitizen.com/blog/?p=520
+
+newspaper were number one by weight in 1973.
+http://www.plasticsindustry.org/AboutPlastics/content.cfm?ItemNumber=790&navItemNumber=1124
+
+plenty of space for landfills
+http://www.manhattan-institute.org/energymyths/myth5.htm
+
+"""
+As a result, it's true that most of the plastic we use does end up in landfill sites. Less than 1 percent of polystyrene containers (e.g. yogurt pots) are recycled, and even well-established recyclables like PET (e.g. soft-drink bottles) end up in the trash more than two-thirds of the time. But the problem isn't that recycling programs are dumping recyclable plastic into the trash--it's that they don't accept the plastics in the first place. """
+http://www.popularmechanics.com/science/environment/recycling/4290631
 
 levels
 
@@ -127,3 +153,32 @@ Identify which items save the most.
 
 Compost food.
 
+Sun 05/18/2014 
+08:57
+
+items:
+
+Receipt paper has BPA.
+http://greenactioncentre.ca/living-green-living-well/myth-you-cant-compost-paper/
+
+
+Recycle:
+Aluminum can:  10
+Tin can:  5
+Plastic bottle:  1
+Glass:  1
+
+Compost:
+Soiled paper:  2
+Apple core:  1
+
+Landfill:
+Styrofoam:  10
+Neon paper:  2
+Bakeware:  2
+Mylar:  5
+Plastic bag:  5
+Receipt paper:  1
+
+Center:
+Electronics:  100

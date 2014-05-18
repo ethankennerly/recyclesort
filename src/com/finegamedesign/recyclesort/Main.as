@@ -40,7 +40,6 @@ package com.finegamedesign.recyclesort
 
         private var loopChannel:SoundChannel;
 
-        public var answerClip:MovieClip;
         public var feedback:MovieClip;
         public var score_txt:TextField;
         public var levelScore_txt:TextField;
@@ -126,17 +125,19 @@ package com.finegamedesign.recyclesort
             view.populate(model, this);
         }
 
-        internal function answer(correct:Boolean):void
+        internal function answer(correct:Boolean, pointClip:PointClip):void
         {
-            answerClip.mouseChildren = false;
-            answerClip.mouseEnabled = false;
+            input.answer.mouseChildren = false;
+            input.answer.mouseEnabled = false;
+            input.answer.x = pointClip.x;
+            input.answer.y = pointClip.y;
             if (correct) {
                 this.correct.play();
-                answerClip.gotoAndPlay("correct");
+                input.answer.gotoAndPlay("correct");
             }
             else {
                 this.wrong.play();
-                answerClip.gotoAndPlay("wrong");
+                input.answer.gotoAndPlay("wrong");
             }
         }
 
