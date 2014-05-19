@@ -9,7 +9,8 @@ package com.finegamedesign.recyclesort
             LevelInput,
             LevelTime,
             LevelIdentify,
-            LevelIgnoreColor
+            LevelIgnoreColor,
+            LevelSwap
         ];
 
         internal static var onLoaded:Function;

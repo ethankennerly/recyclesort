@@ -27,10 +27,11 @@ package com.finegamedesign.recyclesort
         ]
 
         internal static var levels:Array = [
-            {deck: 0, deckCount: 2, filters: 1},
-            {deck: 0, deckCount: 20, filters: 1},
-            {deck: 1, deckCount: 20, filters: 1},
-            {deck: 1, deckCount: 20, filters: 4}
+            {deck: 0, deckCount: 2, filters: 1, swaps: 0},
+            {deck: 0, deckCount: 20, filters: 1, swaps: 0},
+            {deck: 1, deckCount: 20, filters: 1, swaps: 0},
+            {deck: 1, deckCount: 20, filters: 4, swaps: 0},
+            {deck: 1, deckCount: 20, filters: 4, swaps: 3}
         ];
 
         public static function shuffle(array:Array):void
@@ -50,8 +51,12 @@ package com.finegamedesign.recyclesort
         internal var point:int = 0;
         internal var level:int;
         internal var levelScore:int;
+        internal var swapped:Boolean = false;
+        internal var justSwapped:Boolean = false;
         private var correctCount:int;
         private var secondsRemaining:int;
+        private var swapCount:int;
+        private var swaps:Array = [20, 15, 10];
 
         public function Model()
         {
@@ -70,6 +75,7 @@ package com.finegamedesign.recyclesort
             correctCount = 0;
             var params:Object = levels[level - 1];
             filters = params.filters;
+            populateSwap(params["swaps"]);
             secondsRemaining = int.MAX_VALUE;
             queueMax = int.MAX_VALUE;
             queue = [];
@@ -77,6 +83,21 @@ package com.finegamedesign.recyclesort
                 var deck:Array = decks[params.deck].concat();
                 shuffle(deck);
                 queue = queue.concat(deck);
+            }
+        }
+
+        private function populateSwap(swapCount:int):void
+        {
+            this.swapCount = swapCount;
+            swapped = Math.random() * 2 < 0.5;
+            justSwapped = false;
+            swaps = [];
+            if (swapCount) {
+                for (var i:Number = swapCount - 0.5; 0 <= i; i -= 1.0) {
+                    var swapTime:int = int(seconds * i / swapCount);
+                    swapTime += int(Math.random() * 3) - 1;
+                    swaps.push(swapTime);
+                }
             }
         }
 
@@ -92,8 +113,22 @@ package com.finegamedesign.recyclesort
         internal function update(secondsRemaining:int):int
         {
             this.secondsRemaining = secondsRemaining;
+            updateSwap();
             splice();
             return win();
+        }
+
+        private function updateSwap():void
+        {
+            if (secondsRemaining == swaps[0]) {
+                trace("Model.updateSwap: justSwapped");
+                justSwapped = true;
+                swaps.shift();
+                swapped = !swapped;
+            }
+            else {
+                justSwapped = false;
+            }
         }
 
         internal function splice():void
@@ -141,6 +176,7 @@ package com.finegamedesign.recyclesort
         internal function answer(name:String):Boolean
         {
             point = values[queue[0]][name] * filters;
+            point = int(point * Math.max(1, swapCount - 1));
             levelScore += point;
             queue.shift();
             var correct:Boolean = 0 <= point;

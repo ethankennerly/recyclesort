@@ -13,8 +13,7 @@ package com.finegamedesign.recyclesort
             new Filter0().getChildAt(0).filters,
             new Filter1().getChildAt(0).filters,
             new Filter2().getChildAt(0).filters,
-            new Filter3().getChildAt(0).filters,
-            new Filter4().getChildAt(0).filters
+            new Filter3().getChildAt(0).filters
         ];
 
         private static var itemClasses:Object = {
@@ -29,6 +28,10 @@ package com.finegamedesign.recyclesort
         internal var main:Main;
         internal var onCorrect:Function;
         internal var model:Model;
+        private var bindings:Object = {
+            landfill: "LEFT",
+            recycle: "RIGHT"
+        }
         private var countdown:Countdown;
         private var garbage:Array;
         private var pointClip:PointClip;
@@ -44,6 +47,7 @@ package com.finegamedesign.recyclesort
             this.model = model;
             this.main = main;
             populateQueue(model.queue);
+            populateSwap();
             countdown.setup(Model.seconds, main.time_txt);
         }
 
@@ -73,17 +77,6 @@ package com.finegamedesign.recyclesort
             return main.input.head.y - int(i * main.input.head.height);
         }
 
-        private function shift(target:DisplayObject):void
-        {
-            var time:Number = 0.2;
-            var answering:DisplayObject = queue.shift();
-            main.input.addChild(answering);
-            TweenLite.to(answering, time, {x: target.x, y: target.y});
-            for (var i:int = 0; i < queue.length; i++) {
-                TweenLite.to(queue[i], time, {y: queueY(i)});
-            }
-        }
-
         private function answer(name:String):void
         {
             countdown.start();
@@ -91,6 +84,27 @@ package com.finegamedesign.recyclesort
             pointClip = point(main.input[name]);
             shift(main.input[name]);
             main.answer(correct, pointClip);
+        }
+
+        private function shift(target:DisplayObjectContainer):void
+        {
+            var time:Number = 0.2;
+            var answering:DisplayObject = queue.shift();
+            main.input.addChild(answering);
+            var r:int = Math.random() * target.width / 3;
+            TweenLite.to(answering, time, {x: target.x + r, y: target.y,
+                onComplete: adopt, onCompleteParams: [target, answering]});
+            for (var i:int = 0; i < queue.length; i++) {
+                TweenLite.to(queue[i], time, {y: queueY(i)});
+            }
+        }
+
+        private function adopt(target:DisplayObjectContainer,
+                answering:DisplayObject):void
+        {
+            answering.x -= target.x;
+            answering.y -= target.y;
+            target.addChild(answering);
         }
 
         private function point(target:DisplayObject):PointClip
@@ -108,10 +122,10 @@ package com.finegamedesign.recyclesort
 
         internal function update():int
         {
-            if (main.keyMouse.justPressed("LEFT")) {
+            if (main.keyMouse.justPressed(bindings.landfill)) {
                 answer("landfill");
             }
-            else if (main.keyMouse.justPressed("RIGHT")) {
+            else if (main.keyMouse.justPressed(bindings.recycle)) {
                 answer("recycle");
             }
             else if (main.keyMouse.justPressed("MOUSE")) {
@@ -122,7 +136,29 @@ package com.finegamedesign.recyclesort
             }
             var winning:int = model.update(countdown.remaining);
             splice(model.queueMax);
+            updateSwap();
             return winning;
+        }
+
+        private function populateSwap():void
+        {
+            bindings.landfill = model.swapped ? "RIGHT" : "LEFT";
+            bindings.recycle = model.swapped ? "LEFT" : "RIGHT";
+            main.input.landfill.x = (model.swapped ? 1 : -1) * Math.abs(main.input.landfill.x);
+            main.input.recycle.x = (model.swapped ? -1 : 1) * Math.abs(main.input.recycle.x);
+        }
+
+        private function updateSwap():void
+        {
+            bindings.landfill = model.swapped ? "RIGHT" : "LEFT";
+            bindings.recycle = model.swapped ? "LEFT" : "RIGHT";
+            if (model.justSwapped) {
+                var swapTime:Number = 0.1;
+                var landfillX:int = main.input.landfill.x;
+                var recycleX:int = main.input.recycle.x;
+                TweenLite.to(main.input.landfill, swapTime, {x: recycleX});
+                TweenLite.to(main.input.recycle, swapTime, {x: landfillX});
+            }
         }
 
         private function splice(max:int):void

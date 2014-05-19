@@ -182,9 +182,6 @@ package com.finegamedesign.recyclesort
         private function reset():void
         {
             inTrial = false;
-            if (view) {
-                view.clear();
-            }
             if (null != loopChannel) {
                 loopChannel.stop();
             }
@@ -209,6 +206,9 @@ package com.finegamedesign.recyclesort
 
         public function restart():void
         {
+            if (view) {
+                view.clear();
+            }
             mouseChildren = true;
             gotoAndPlay(1);
         }

@@ -21,8 +21,8 @@ package com.finegamedesign.recyclesort
             for (var c:int = numChildren - 1; 0 <= c; c--) {
                 removeChildAt(c);
             }
-            var columnCount:int = 3;
-            var columnWidth:int = 100;
+            var columnCount:int = 1;
+            var columnWidth:int = 80;
             for (var i:int = 0; i < LevelLoader.levels.length; i++) {
                 var tile:LevelTile = new LevelTile();
                 tile.x = columnWidth * ((i % columnCount) - ((columnCount - 1) / 2));
