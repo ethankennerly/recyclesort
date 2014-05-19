@@ -1,25 +1,18 @@
 TODO
-	non-color coded items
-	color miscode items
+	auto scroll.
 	plastic types
 	Icons:  Compost, Landfill, Recycle
 	clean or dirty
 	reuse or recycle or landfill
-	Opportunity cost or opportunity revenue from selection:  electronics, aluminum, food-soiled, paper, plastic, metal, glass, 
-	landfill only:  mylar, styrofoam, ceramics, bakeware, neon paper
+	electronics, food-soiled, paper, metal, glass.
+	landfill only:  mylar, ceramics, bakeware, neon paper
 	success brightens level button.
 	Recycle eyes and mouth inspired by recycle monster (terracycle)
 	Information after a session.
-	reuse
-	high level:  random button position
-	high level:  switch button position during play
 	links to pros and cons of what to recycle, compost, landfill.
-	discriminate scores to 99th percentile.
 	discriminate scores to 99.9th percentile.
 	discriminate scores to 99.99th percentile.
-	auto scroll.
 	Introduce another item type
-	shuffle button positions
 	anti-color coded items
 	Landfill, Plastic Bags, Glass Plastic Aluminum, Electronics
 	San Francisco:  green glass worth recycling

@@ -86,21 +86,6 @@ package com.finegamedesign.recyclesort
             }
         }
 
-        private function populateSwap(swapCount:int):void
-        {
-            this.swapCount = swapCount;
-            swapped = Math.random() * 2 < 0.5;
-            justSwapped = false;
-            swaps = [];
-            if (swapCount) {
-                for (var i:Number = swapCount - 0.5; 0 <= i; i -= 1.0) {
-                    var swapTime:int = int(seconds * i / swapCount);
-                    swapTime += int(Math.random() * 3) - 1;
-                    swaps.push(swapTime);
-                }
-            }
-        }
-
         internal function clear():void
         {
         }
@@ -113,21 +98,33 @@ package com.finegamedesign.recyclesort
         internal function update(secondsRemaining:int):int
         {
             this.secondsRemaining = secondsRemaining;
-            updateSwap();
+            justSwapped = false;
             splice();
             return win();
         }
 
+        private function populateSwap(swapCount:int):void
+        {
+            this.swapCount = swapCount;
+            swapped = Math.random() * 2 < 0.5;
+            justSwapped = swapped;
+            swaps = [];
+            if (swapCount) {
+                for (var i:Number = swapCount - 0.5; 0 <= i; i -= 1.0) {
+                    var swapTime:int = int(seconds * i / swapCount);
+                    swapTime += int(Math.random() * 3) - 1;
+                    swaps.push(swapTime);
+                }
+            }
+        }
+
         private function updateSwap():void
         {
-            if (secondsRemaining == swaps[0]) {
+            if (secondsRemaining <= swaps[0]) {
                 trace("Model.updateSwap: justSwapped");
                 justSwapped = true;
                 swaps.shift();
                 swapped = !swapped;
-            }
-            else {
-                justSwapped = false;
             }
         }
 
@@ -172,7 +169,10 @@ package com.finegamedesign.recyclesort
             score = sum;
             return sum;
         }
-        
+       
+        /**
+         * To avoid hesitating to answer, swap after answer.
+         */
         internal function answer(name:String):Boolean
         {
             point = values[queue[0]][name] * filters;
@@ -183,6 +183,7 @@ package com.finegamedesign.recyclesort
             if (correct) {
                 correctCount++;
             }
+            updateSwap();
             return correct;
         }
     }

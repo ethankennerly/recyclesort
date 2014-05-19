@@ -32,6 +32,7 @@ package com.finegamedesign.recyclesort
             landfill: "LEFT",
             recycle: "RIGHT"
         }
+        private var buttonXs:Object = {};
         private var countdown:Countdown;
         private var garbage:Array;
         private var pointClip:PointClip;
@@ -82,6 +83,7 @@ package com.finegamedesign.recyclesort
             countdown.start();
             var correct:Boolean = model.answer(name);
             pointClip = point(main.input[name]);
+            updateSwap();
             shift(main.input[name]);
             main.answer(correct, pointClip);
         }
@@ -92,7 +94,8 @@ package com.finegamedesign.recyclesort
             var answering:DisplayObject = queue.shift();
             main.input.addChild(answering);
             var r:int = Math.random() * target.width / 3;
-            TweenLite.to(answering, time, {x: target.x + r, y: target.y,
+            var x:int = r + buttonXs[target.name];
+            TweenLite.to(answering, time, {x: x, y: target.y,
                 onComplete: adopt, onCompleteParams: [target, answering]});
             for (var i:int = 0; i < queue.length; i++) {
                 TweenLite.to(queue[i], time, {y: queueY(i)});
@@ -136,29 +139,38 @@ package com.finegamedesign.recyclesort
             }
             var winning:int = model.update(countdown.remaining);
             splice(model.queueMax);
-            updateSwap();
             return winning;
         }
 
         private function populateSwap():void
         {
-            bindings.landfill = model.swapped ? "RIGHT" : "LEFT";
-            bindings.recycle = model.swapped ? "LEFT" : "RIGHT";
-            main.input.landfill.x = (model.swapped ? 1 : -1) * Math.abs(main.input.landfill.x);
-            main.input.recycle.x = (model.swapped ? -1 : 1) * Math.abs(main.input.recycle.x);
+            if (!("landfill" in buttonXs)) {
+                buttonXs["landfill"] = main.input.landfill.x;
+                buttonXs["recycle"] = main.input.recycle.x;
+            }
+            bindings.landfill = "LEFT";
+            bindings.recycle = "RIGHT";
+            buttonXs["landfill"] = -1 * Math.abs(buttonXs["landfill"]);
+            buttonXs["recycle"] = Math.abs(buttonXs["recycle"]);
+            main.input.landfill.x = buttonXs["landfill"];
+            main.input.recycle.x = buttonXs["recycle"];
+            updateSwap(0.0);
         }
 
-        private function updateSwap():void
+        private function updateSwap(swapTime:Number=0.1):Boolean
         {
             bindings.landfill = model.swapped ? "RIGHT" : "LEFT";
             bindings.recycle = model.swapped ? "LEFT" : "RIGHT";
             if (model.justSwapped) {
-                var swapTime:Number = 0.1;
-                var landfillX:int = main.input.landfill.x;
-                var recycleX:int = main.input.recycle.x;
-                TweenLite.to(main.input.landfill, swapTime, {x: recycleX});
-                TweenLite.to(main.input.recycle, swapTime, {x: landfillX});
+                buttonXs["landfill"] *= -1;
+                buttonXs["recycle"] *= -1;
+                TweenLite.to(main.input.landfill, swapTime, 
+                    {x: buttonXs["landfill"]});
+                TweenLite.to(main.input.recycle, swapTime, 
+                    {x: buttonXs["recycle"]});
+                return true;
             }
+            return false;
         }
 
         private function splice(max:int):void
